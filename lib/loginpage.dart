@@ -10,8 +10,11 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Expenses"),
+        leading: Icon(Icons.monetization_on),
+      ),
     );
   }
 }
