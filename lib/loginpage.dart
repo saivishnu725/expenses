@@ -18,6 +18,24 @@ class _LoginPageState extends State<LoginPage> {
         backgroundColor: Colors.grey,
         centerTitle: true,
       ),
+      body: ListView(
+        children: [
+          Card(
+            color: Colors.white,
+            elevation: 1.5,
+            child: ListTile(
+              leading: CircleAvatar(
+                backgroundColor: Colors.greenAccent,
+                child: Icon(Icons.arrow_forward,
+              )
+              ),
+              title: Text("Title 1"),
+              subtitle: Text("Subtitle 1"),
+              trailing: Text("₹ xyz"),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
