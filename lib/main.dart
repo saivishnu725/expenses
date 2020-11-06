@@ -1,12 +1,13 @@
+import 'package:firebase_core/firebase_core.dart';
+import 'streampage.dart';
 import 'package:flutter/material.dart';
-import 'detailspage.dart';
-import 'homepage.dart';
 
-void main() {
-  runApp(
-    MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: DetailsPage(),
-    )
-  );
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(MaterialApp(
+    debugShowCheckedModeBanner: false,
+    title: "Title",
+    home: StreamPage(),
+  ));
 }
