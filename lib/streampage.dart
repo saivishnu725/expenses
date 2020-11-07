@@ -49,7 +49,9 @@ class _StreamPageState extends State<StreamPage> {
                   onTap: () {
                     setState(() {
                       editTitle = snapshot.data.docs.elementAt(index)['title'];
-                      editCost = snapshot.data.docs.elementAt(index)['cost'].toString();
+                      editCost = snapshot.data.docs
+                          .elementAt(index)['cost']
+                          .toString();
                       deleteID = snapshot.data.docs.elementAt(index).id;
                     });
                     Navigator.push(context,
@@ -62,12 +64,12 @@ class _StreamPageState extends State<StreamPage> {
                       child: Icon(Icons.delete_forever),
                       color: Colors.white,
                       elevation: 0.0,
-                      onPressed: () async{
+                      onPressed: () async {
                         debugPrint("Removing data at index $index");
                         try {
                           debugPrint("Not yet...");
                           // snapshot.data.docs.remove(value);
-                          await deleteProduc(
+                          await deleteProducWidget(
                               snapshot.data.docs.elementAt(index).id,
                               snapshot.data.docs.elementAt(index)['title'],
                               context);
@@ -90,7 +92,8 @@ class _StreamPageState extends State<StreamPage> {
                 Center(child: CircularProgressIndicator()),
                 Row(
                   children: [
-                    Text('Please wait for the data to load or check your internet connection.')
+                    Text(
+                        'Please wait for the data to load or check your internet connection.')
                   ],
                 ),
               ],
@@ -104,7 +107,7 @@ class _StreamPageState extends State<StreamPage> {
 
 //                 Text(snapshot.data.docs.elementAt(1)['cost'].toString()),
 
-Future<Widget> deleteProduc(
+Future<Widget> deleteProducWidget(
     String id, String delTitle, BuildContext context) async {
   return AlertDialog(
     title: Text('Are you sure you want to delete \' $delTitle \' '),
@@ -124,6 +127,10 @@ Future<Widget> deleteProduc(
     ],
   );
   // await FirebaseFirestore.instance.collection('data').doc(id).delete();
+}
+
+Future<void> deleteProduc(String id) async {
+  await FirebaseFirestore.instance.collection('data').doc(id).delete();
 }
 
 Future<void> addData(String titleValue, var costValue) async {

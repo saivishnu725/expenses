@@ -106,7 +106,7 @@ class _EditScreenState extends State<EditScreen> {
                       Expanded(
                           child: RaisedButton(
                         onPressed: () {
-                          deleteProduc(deleteID, editTitle,context);
+                          deleteProduc(deleteID);
                           Navigator.push(context,
                               MaterialPageRoute(builder: (context) {
                             return StreamPage();
@@ -131,6 +131,7 @@ class _EditScreenState extends State<EditScreen> {
                           if (_formkey.currentState.validate()) {
                             debugPrint("Before calling func");
                             addData(title, cost);
+                            deleteProduc(id);
                             debugPrint("After calling func");
                             Navigator.pop(context);
                           }
