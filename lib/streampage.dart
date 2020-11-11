@@ -65,19 +65,24 @@ class _StreamPageState extends State<StreamPage> {
                       color: Colors.white,
                       elevation: 0.0,
                       onPressed: () async {
-                        debugPrint("Removing data at index $index");
-                        try {
-                          debugPrint("Not yet...");
-                          // snapshot.data.docs.remove(value);
-                          await deleteProducWidget(
-                              snapshot.data.docs.elementAt(index).id,
-                              snapshot.data.docs.elementAt(index)['title'],
-                              context);
-                          debugPrint("It worked!!");
-                        } catch (e) {
-                          debugPrint("It didnt work!!!");
-                          debugPrint(e);
-                        }
+                        // snapshot.data.docs.elementAt(index).id
+                        AlertDialog(
+                          title: Text("Are you sure you want to delete"),
+                          actions: [
+                            FlatButton(
+                              child: Text("Ok"),
+                              onPressed: () => deleteProduc(
+                                  snapshot.data.docs.elementAt(index).id),
+                            ),
+                            FlatButton(
+                              child: Text("Cancel"),
+                              onPressed: () {
+                                Navigator.of(context, rootNavigator: true)
+                                    .pop('dialog');
+                              },
+                            ),
+                          ],
+                        );
                       }),
                 );
               },
@@ -107,27 +112,27 @@ class _StreamPageState extends State<StreamPage> {
 
 //                 Text(snapshot.data.docs.elementAt(1)['cost'].toString()),
 
-Future<Widget> deleteProducWidget(
-    String id, String delTitle, BuildContext context) async {
-  return AlertDialog(
-    title: Text('Are you sure you want to delete \' $delTitle \' '),
-    actions: [
-      FlatButton(
-        child: Text('Cancel'),
-        onPressed: () {
-          Navigator.pop(context);
-        },
-      ),
-      FlatButton(
-        child: Text('Delete'),
-        onPressed: () async {
-          await FirebaseFirestore.instance.collection('data').doc(id).delete();
-        },
-      ),
-    ],
-  );
-  // await FirebaseFirestore.instance.collection('data').doc(id).delete();
-}
+// Future<Widget> deleteProducWidget(
+//     String id, String delTitle, BuildContext context) async {
+//   return AlertDialog(
+//     title: Text('Are you sure you want to delete \' $delTitle \' '),
+//     actions: [
+//       FlatButton(
+//         child: Text('Cancel'),
+//         onPressed: () {
+//           Navigator.pop(context);
+//         },
+//       ),
+//       FlatButton(
+//         child: Text('Delete'),
+//         onPressed: () async {
+//           await FirebaseFirestore.instance.collection('data').doc(id).delete();
+//         },
+//       ),
+//     ],
+//   );
+//   // await FirebaseFirestore.instance.collection('data').doc(id).delete();
+// }
 
 Future<void> deleteProduc(String id) async {
   await FirebaseFirestore.instance.collection('data').doc(id).delete();
