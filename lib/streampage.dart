@@ -66,22 +66,37 @@ class _StreamPageState extends State<StreamPage> {
                       elevation: 0.0,
                       onPressed: () async {
                         // snapshot.data.docs.elementAt(index).id
-                        AlertDialog(
-                          title: Text("Are you sure you want to delete"),
-                          actions: [
-                            FlatButton(
-                              child: Text("Ok"),
-                              onPressed: () => deleteProduc(
-                                  snapshot.data.docs.elementAt(index).id),
-                            ),
-                            FlatButton(
-                              child: Text("Cancel"),
-                              onPressed: () {
-                                Navigator.of(context, rootNavigator: true)
-                                    .pop('dialog');
-                              },
-                            ),
-                          ],
+                        showDialog(
+                          context: context,
+                          builder: (context) {
+                            Widget showBox() {
+                              return AlertDialog(
+                                title: Text("Are you sure?"),
+                                actions: [
+                                  RaisedButton(
+                                      child: Text("Cancel"),
+                                      color: Colors.red,
+                                      onPressed: () {
+                                        debugPrint("Cancel");
+                                        Navigator.pop(context);
+                                      }),
+                                  RaisedButton(
+                                    child: Text("Okay"),
+                                    color: Colors.green,
+                                    onPressed: () {
+                                      debugPrint("Okay");
+                                      deleteProduc(snapshot.data.docs
+                                          .elementAt(index)
+                                          .id);
+                                      Navigator.pop(context);
+                                    },
+                                  ),
+                                ],
+                              );
+                            }
+
+                            return showBox();
+                          },
                         );
                       }),
                 );
@@ -94,7 +109,7 @@ class _StreamPageState extends State<StreamPage> {
                   width: 200.0,
                   height: 200.0,
                 ),
-                Center(child: CircularProgressIndicator()),
+                Expanded(child: Center(child: CircularProgressIndicator())),
                 Row(
                   children: [
                     Text(
