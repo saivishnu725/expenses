@@ -1,8 +1,7 @@
-import 'package:expenses/streampage.dart';
-
-import 'test.dart';
+// import 'package:expenses/addscreen.dart';
+// import 'test.dart';
 import 'package:firebase_core/firebase_core.dart';
-// import 'streampage.dart';
+import 'streampage.dart';
 import 'package:flutter/material.dart';
 
 void main() async {
@@ -10,7 +9,7 @@ void main() async {
   await Firebase.initializeApp();
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
-    title: "Title",
+    title: "Expenses",
     home: StreamPage()
   ));
 }

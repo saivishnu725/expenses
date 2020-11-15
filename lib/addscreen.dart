@@ -103,7 +103,45 @@ class _AddScreenState extends State<AddScreen> {
                       keyboardType: TextInputType.number,
                     ),
                   ),
-
+                  // Date
+                  Row(
+                    children: [
+                      //Year
+                      Expanded(
+                          child: TextField(
+                        decoration: InputDecoration(
+                          labelText: DateTime.now().year.toString() + "(Optional)",
+                          hintText: "Enter the year",
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(5.0),
+                          ),
+                        ),
+                      )),
+                      Container(width: 20.0,height: 20.0,),
+                      // Month
+                      Expanded(child: TextField(
+                        decoration: InputDecoration(
+                          labelText: DateTime.now().month.toString() + "(Optional)",
+                          hintText: "Enter the month in numbers",
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(5.0),
+                          ),
+                        ),
+                      )),
+                      Container(width: 20.0,height: 20.0,),
+                      // Date
+                      Expanded(child: TextField(
+                        decoration: InputDecoration(
+                          labelText: DateTime.now().day.toString() + "(Optional)",
+                          hintText: "Enter the date",
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(5.0),
+                          ),
+                        ),
+                      )),
+                    ],
+                  ),
+                  // Buttons
                   Row(
                     children: [
                       Expanded(
@@ -155,3 +193,6 @@ class _AddScreenState extends State<AddScreen> {
     );
   }
 }
+
+
+// 

@@ -106,11 +106,37 @@ class _EditScreenState extends State<EditScreen> {
                       Expanded(
                           child: RaisedButton(
                         onPressed: () {
-                          deleteProduc(deleteID);
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (context) {
-                            return StreamPage();
-                          }));
+                          // deleteProduc(deleteID);
+                          showDialog(
+                            context: context,
+                            builder: (context) {
+                              return AlertDialog(
+                                title: Text("Are you sure?"),
+                                actions: [
+                                  RaisedButton(
+                                      child: Text("Cancel"),
+                                      color: Colors.red,
+                                      onPressed: () {
+                                        debugPrint("Cancel");
+                                        Navigator.pop(context);
+                                      }),
+                                  RaisedButton(
+                                    child: Text("Okay"),
+                                    color: Colors.green,
+                                    onPressed: () {
+                                      debugPrint("Okay");
+                                      deleteProduc(deleteID);
+                                      // Navigator.pop(context);
+                                      Navigator.push(context,
+                                          MaterialPageRoute(builder: (context) {
+                                        return StreamPage();
+                                      }));
+                                    },
+                                  ),
+                                ],
+                              );
+                            },
+                          ); //showDialogue
                         },
                         color: Colors.red,
                         child: Text(
@@ -131,7 +157,7 @@ class _EditScreenState extends State<EditScreen> {
                           if (_formkey.currentState.validate()) {
                             debugPrint("Before calling func");
                             addData(title, cost);
-                            deleteProduc(id);
+                            deleteProduc(deleteID);
                             debugPrint("After calling func");
                             Navigator.pop(context);
                           }

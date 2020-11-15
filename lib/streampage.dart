@@ -1,3 +1,5 @@
+import 'package:expenses/test.dart';
+
 import 'addscreen.dart';
 import 'editscreen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -10,20 +12,39 @@ class StreamPage extends StatefulWidget {
   _StreamPageState createState() => _StreamPageState();
 }
 
+int totalCostYr = 0;
 String editTitle;
 String editCost;
 String deleteID;
+// var das = DateTime.utc(2020, 11, 20).toString();
+var das = DateTime.now().year.toString() +
+    "-" +
+    DateTime.now().month.toString() +
+    "-" +
+    DateTime.now().day.toString();
 
 class _StreamPageState extends State<StreamPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
+      floatingActionButton: FloatingActionButton(
+          child: Text("Total"),
+          onPressed: () {
+            showDialog(
+              context: context,
+              builder: (context) {
+                return AlertDialog(
+                  title: Text("Total is $totalCostYr"),
+                );
+              },
+            );
+          }),
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: Colors.purple,
         title: Text("Expenses"),
-        leading: Icon(Icons.monetization_on),
+        leading: Icon(Icons.monetization_on_rounded),
         actions: [
           IconButton(
               icon: Icon(Icons.add),
@@ -39,9 +60,12 @@ class _StreamPageState extends State<StreamPage> {
         stream: FirebaseFirestore.instance.collection('data').snapshots(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.hasData) {
+            totalCostYr = 0;
             return ListView.builder(
               itemCount: snapshot.data.docs.length,
               itemBuilder: (BuildContext context, int index) {
+                totalCostYr = totalCostYr +
+                    int.parse(snapshot.data.docs.elementAt(index)['cost']);
                 return ListTile(
                   title: Text(snapshot.data.docs.elementAt(index)['title']),
                   subtitle: Text(
@@ -60,6 +84,7 @@ class _StreamPageState extends State<StreamPage> {
                     }));
                   },
                   // addData('sampletitle', '7222558'),
+                  trailing: Text(snapshot.data.docs.elementAt(index)['time']),
                   leading: RaisedButton(
                       child: Icon(Icons.delete_forever),
                       color: Colors.white,
@@ -112,8 +137,8 @@ class _StreamPageState extends State<StreamPage> {
                 Expanded(child: Center(child: CircularProgressIndicator())),
                 Row(
                   children: [
-                    Text(
-                        'Please wait for the data to load or check your internet connection.')
+                    Text('Please wait for the data to load'),
+                    Text("check your internet connection."),
                   ],
                 ),
               ],
@@ -158,6 +183,7 @@ Future<void> addData(String titleValue, var costValue) async {
   await FirebaseFirestore.instance.collection('data').add({
     'title': titleValue,
     'cost': costValue,
+    'time': das,
   });
   debugPrint("After adding data!!");
 }
