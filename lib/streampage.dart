@@ -29,16 +29,12 @@ class _StreamPageState extends State<StreamPage> {
     return Scaffold(
       backgroundColor: Colors.white,
       floatingActionButton: FloatingActionButton(
-          child: Text("Total"),
+          child: Icon(Icons.add),
           onPressed: () {
-            showDialog(
-              context: context,
-              builder: (context) {
-                return AlertDialog(
-                  title: Text("Total is $totalCostYr"),
-                );
-              },
-            );
+            debugPrint("Add");
+            Navigator.push(context, MaterialPageRoute(builder: (context) {
+              return AddScreen();
+            }));
           }),
       appBar: AppBar(
         centerTitle: true,
@@ -47,12 +43,18 @@ class _StreamPageState extends State<StreamPage> {
         leading: Icon(Icons.monetization_on_rounded),
         actions: [
           IconButton(
-              icon: Icon(Icons.add),
+              icon: Text("Total"),
               onPressed: () {
-                debugPrint("Add");
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return AddScreen();
-                }));
+                showDialog(
+                  context: context,
+                  builder: (context) {
+                    return AlertDialog(
+                      elevation: 10.0,
+                      backgroundColor: Colors.green,
+                      title: Text("Total is $totalCostYr"),
+                    );
+                  },
+                );
               }),
         ],
       ),
