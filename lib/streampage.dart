@@ -1,3 +1,4 @@
+import 'package:expenses/loginpage.dart';
 import 'package:expenses/test.dart';
 
 import 'addscreen.dart';
@@ -43,7 +44,7 @@ class _StreamPageState extends State<StreamPage> {
         leading: Icon(Icons.monetization_on_rounded),
         actions: [
           IconButton(
-              icon: Text("Total"),
+              icon: Text(userCredential.user.displayName),
               onPressed: () {
                 showDialog(
                   context: context,
