@@ -1,6 +1,4 @@
 import 'package:expenses/loginpage.dart';
-import 'package:expenses/test.dart';
-
 import 'addscreen.dart';
 import 'editscreen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';

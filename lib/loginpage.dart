@@ -15,6 +15,14 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  @protected
+  @mustCallSuper
+  @override
+  void initState() {
+    super.initState();
+    signOut();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,6 +55,7 @@ class _LoginPageState extends State<LoginPage> {
                   debugPrint("SignIn With Google");
                   userCredential = await signInWithGoogle();
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    debugPrint("StreamPage()");
                     return StreamPage();
                   }));
                 }),
