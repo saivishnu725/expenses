@@ -11,24 +11,23 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final pref = await SharedPreferences.getInstance();
   loggedIn = pref.getBool('isLoggedIn');
+  if (pref.getBool('isLoggedIn') == null) {
+    pref.setBool('isLoggedIn', false);
+  }
   if (FirebaseAuth.instance.currentUser.uid != null) {
     await pref.setBool('isLoggedIn', false);
   } else {
     await pref.setBool('isLoggedIn', true);
   }
-  if () {
+  if (pref.getBool('isLoggedIn')) {
   await Firebase.initializeApp();
   runApp(MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: "Expenses",
-      home: StreamPage()));
-}
-   else 
-  {
-      await Firebase.initializeApp();
-  runApp(MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: "Expenses",
-      home: StreamPage()));
-  }
+      debugShowCheckedModeBanner: false, title: "Expenses", home: LoginPage()));
+  } else {
+    await Firebase.initializeApp();
+    runApp(MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: "Expenses",
+        home: StreamPage()));
+  // }
 }
