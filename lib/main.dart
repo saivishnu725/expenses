@@ -3,20 +3,32 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'streampage.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+var loggedIn;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  final pref = await SharedPreferences.getInstance();
+  loggedIn = pref.getBool('isLoggedIn');
   if (FirebaseAuth.instance.currentUser.uid != null) {
-    runApp(MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: "Expenses",
-        home: LoginPage()));
+    await pref.setBool('isLoggedIn', false);
   } else {
-    runApp(MaterialApp(
+    await pref.setBool('isLoggedIn', true);
+  }
+  if () {
+  await Firebase.initializeApp();
+  runApp(MaterialApp(
       debugShowCheckedModeBanner: false,
       title: "Expenses",
-      home: StreamPage(),
-    ));
+      home: StreamPage()));
+}
+   else 
+  {
+      await Firebase.initializeApp();
+  runApp(MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: "Expenses",
+      home: StreamPage()));
   }
 }
