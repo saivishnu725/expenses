@@ -1,6 +1,8 @@
 import 'package:expenses/streampage.dart';
 import 'package:flutter/material.dart';
 
+String email = 'saivishnu725@gmail.com';
+
 class LoginScreen extends StatelessWidget {
   const LoginScreen({Key key}) : super(key: key);
   @override

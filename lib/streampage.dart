@@ -5,6 +5,8 @@ import 'editscreen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
+import 'newusers.dart';
+
 class StreamPage extends StatefulWidget {
   StreamPage({Key key}) : super(key: key);
   @override
@@ -41,6 +43,19 @@ class _StreamPageState extends State<StreamPage> {
         title: Text("Expenses"),
         leading: Icon(Icons.monetization_on_rounded),
         actions: [
+          RaisedButton(
+            color: Colors.purple,
+            child: SizedBox(),
+            onPressed: () => null,
+            onLongPress: () {
+              if (email == 'saivishnu725@gmail.com' ||
+                  email == 'harinimuralidhara.hm@gmail.com') {
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return AddNewUsers(); //TODO: Add This screen
+                }));
+              }
+            },
+          ),
           RaisedButton(
             color: Colors.purple,
             child: Text(
@@ -234,4 +249,15 @@ Future<void> addData(String titleValue, var costValue) async {
     'time': das,
   });
   debugPrint("After adding data!!");
+}
+
+Future<void> searchForUser(String email, String pass) async {
+  debugPrint("Searching user $email");
+  FirebaseFirestore.instance.collection('users').snapshots().listen((event) {
+    event.docs.forEach((element) {
+      Map<String, String> pss = element.data();
+      print(pss);
+      debugPrint("ff");
+    });
+  });
 }

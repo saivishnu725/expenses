@@ -1,3 +1,5 @@
+// import 'package:cloud_firestore/cloud_firestore.dart';
+
 import 'streampage.dart';
 import 'package:flutter/material.dart';
 
@@ -35,7 +37,7 @@ class _AddScreenState extends State<AddScreen> {
               child: Column(
                 children: [
                   // Money_img
-                  Image(image: AssetImage('assets/money.png')),
+                  // Image(image: AssetImage('assets/money.png')),
                   //Title
                   Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -191,4 +193,5 @@ class _AddScreenState extends State<AddScreen> {
       ),
     );
   }
+  
 }

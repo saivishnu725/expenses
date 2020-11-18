@@ -1,4 +1,5 @@
-import 'package:expenses/login.dart';
+// import 'package:expenses/login.dart';
+import 'package:expenses/newusers.dart';
 import 'package:firebase_core/firebase_core.dart';
 // import 'streampage.dart';
 import 'package:flutter/material.dart';
@@ -9,5 +10,5 @@ void main() async {
   runApp(MaterialApp(
       debugShowCheckedModeBanner: false,
       title: "Expenses",
-      home: LoginScreen()));
+      home: AddNewUsers()));
 }
