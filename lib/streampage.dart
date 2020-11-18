@@ -1,6 +1,5 @@
-// import 'package:expenses/loginpage.dart';
-// import 'package:google_sign_in/google_sign_in.dart';
 // import 'package:shared_preferences/shared_preferences.dart';
+import 'package:expenses/login.dart';
 import 'addscreen.dart';
 import 'editscreen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -8,7 +7,6 @@ import 'package:flutter/material.dart';
 
 class StreamPage extends StatefulWidget {
   StreamPage({Key key}) : super(key: key);
-
   @override
   _StreamPageState createState() => _StreamPageState();
 }
@@ -44,13 +42,53 @@ class _StreamPageState extends State<StreamPage> {
         leading: Icon(Icons.monetization_on_rounded),
         actions: [
           RaisedButton(
-              color: Colors.grey,
-              child: Text('S O'),
-              onPressed: () async {
-                // GoogleSignIn().signOut();
-                // final pref = await SharedPreferences.getInstance();
-                // await pref.setBool('isLoggedIn' , false) ; 
-              }),
+            color: Colors.purple,
+            child: Text(
+              'Sign out',
+              style: TextStyle(
+                color: Colors.white,
+              ),
+            ),
+            elevation: 0.0,
+            onPressed: () async {
+              showDialog(
+                context: context,
+                builder: (context) {
+                  return AlertDialog(
+                    title: Text("Do you want to sign out?"),
+                    actions: [
+                      RaisedButton(
+                        child: Text(
+                          "Cancel",
+                          style: TextStyle(
+                            color: Colors.green,
+                          ),
+                        ),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                      ),
+                      RaisedButton(
+                        child: Text(
+                          "Sign-out",
+                          style: TextStyle(
+                            color: Colors.red,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        onPressed: () {
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) {
+                            return LoginScreen();
+                          }));
+                        },
+                      ),
+                    ],
+                  );
+                },
+              );
+            },
+          ),
           IconButton(
               icon: Text("Total"),
               onPressed: () {
@@ -160,7 +198,6 @@ class _StreamPageState extends State<StreamPage> {
     );
   }
 }
-
 //                 Text(snapshot.data.docs.elementAt(1)['cost'].toString()),
 
 // Future<Widget> deleteProducWidget(

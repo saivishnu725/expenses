@@ -3,7 +3,6 @@ import 'streampage.dart';
 
 class EditScreen extends StatefulWidget {
   EditScreen({Key key}) : super(key: key);
-
   @override
   _EditScreenState createState() => _EditScreenState();
 }
@@ -100,7 +99,6 @@ class _EditScreenState extends State<EditScreen> {
                       keyboardType: TextInputType.number,
                     ),
                   ),
-
                   Row(
                     children: [
                       Expanded(
