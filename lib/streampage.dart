@@ -1,6 +1,6 @@
-import 'package:expenses/loginpage.dart';
-import 'package:google_sign_in/google_sign_in.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+// import 'package:expenses/loginpage.dart';
+// import 'package:google_sign_in/google_sign_in.dart';
+// import 'package:shared_preferences/shared_preferences.dart';
 import 'addscreen.dart';
 import 'editscreen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -47,12 +47,12 @@ class _StreamPageState extends State<StreamPage> {
               color: Colors.grey,
               child: Text('S O'),
               onPressed: () async {
-                GoogleSignIn().signOut();
-                final pref = await SharedPreferences.getInstance();
-                await pref.setBool('isLoggedIn' , false) ; 
+                // GoogleSignIn().signOut();
+                // final pref = await SharedPreferences.getInstance();
+                // await pref.setBool('isLoggedIn' , false) ; 
               }),
           IconButton(
-              icon: Text(userCredential.user.displayName),
+              icon: Text("Total"),
               onPressed: () {
                 showDialog(
                   context: context,
